@@ -1,5 +1,6 @@
 import { PGlite } from "@electric-sql/pglite";
 import fs from "fs";
+import type { TCar } from "./types/car.interface.js";
 
 (async () => {
   const db = new PGlite();
@@ -62,8 +63,9 @@ import fs from "fs";
     `);
 
   const query = fs.readFileSync("./src/query.sql", "utf-8");
-  const response = await db.query(query);
+  const response = await db.query<TCar>(query);
+  const cars = response?.rows;
 
   console.clear();
-  console.table(response.rows);
+  console.table(cars);
 })();

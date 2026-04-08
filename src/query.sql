@@ -1,3 +1,4 @@
-SELECT brand, model, year, price FROM cars
-	WHERE year >= 1980
-	AND year <= 1989;
+SELECT brand, model, condition, price FROM cars
+	WHERE (price < 250000
+  OR brand = 'Porsche')
+  AND condition > 3
