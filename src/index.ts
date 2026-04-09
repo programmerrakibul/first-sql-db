@@ -62,14 +62,17 @@ import type { TCar } from "./types/car.interface.js";
           ('Bentley', 'T2', 1978, 52000, 'silver', 4, false);
     `);
 
+    // Read query
   const query = fs.readFileSync("./src/query.sql", "utf-8");
 
   // CRUD operation query
   await db.exec(query);
 
+  // Read
   const response = await db.query<TCar>(`SELECT * FROM cars;`);
   const cars = response?.rows;
 
+  // Print
   console.clear();
   console.table(cars);
 })();
