@@ -1,4 +1,4 @@
-SELECT brand, model, condition, price FROM cars
-	WHERE (price < 250000
-  OR brand = 'Porsche')
-  AND condition > 3
+-- Inserting data
+INSERT INTO cars 
+(brand, model, year, price, color, condition, sold) VALUES
+('Toyota', 'Camry', 2018, 25000, 'Blue', 4, false);

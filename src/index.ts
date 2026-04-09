@@ -63,7 +63,11 @@ import type { TCar } from "./types/car.interface.js";
     `);
 
   const query = fs.readFileSync("./src/query.sql", "utf-8");
-  const response = await db.query<TCar>(query);
+
+  // CRUD operation query
+  await db.exec(query);
+
+  const response = await db.query<TCar>(`SELECT * FROM cars;`);
   const cars = response?.rows;
 
   console.clear();
