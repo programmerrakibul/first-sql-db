@@ -1,22 +1,14 @@
 import { PGlite } from "@electric-sql/pglite";
 import fs from "fs";
-import type { TCar } from "./types/car.interface.js";
+import type { TCar } from "./types/index.js";
 
 (async () => {
   const db = new PGlite();
 
+  const tables = fs.readFileSync("./create-tables.sql", "utf-8");
+  await db.exec(tables);
+
   await db.exec(`
-    CREATE TABLE IF NOT EXISTS cars (
-    id SERIAL PRIMARY KEY,
-    brand TEXT,
-    model TEXT,
-    year INTEGER,
-    price INTEGER,
-    color TEXT,
-    condition INTEGER,
-    sold BOOLEAN
-    );
-    
     INSERT INTO cars (brand, model, year, price, color, condition, sold) VALUES 
           ('Ford', 'Mustang', 1965, 45000, 'white', 4, false),
           ('Chevrolet', 'Camaro', 1970, 48000, 'red', 2, false),
@@ -62,7 +54,7 @@ import type { TCar } from "./types/car.interface.js";
           ('Bentley', 'T2', 1978, 52000, 'silver', 4, false);
     `);
 
-    // Read query
+  // Read query
   const query = fs.readFileSync("./src/query.sql", "utf-8");
 
   // CRUD operation query
