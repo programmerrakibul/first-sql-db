@@ -8,8 +8,8 @@ import type { TCar } from "./types/index.js";
   const db = new PGlite();
 
   // Create tables and insert data
-  const createTables = fs.readFileSync("./create-tables.sql", "utf-8");
-  const carsData = fs.readFileSync("./insert-cars-data.sql", "utf-8");
+  const createTables = fs.readFileSync("./src/create-tables.sql", "utf-8");
+  const carsData = fs.readFileSync("./src/insert-cars-data.sql", "utf-8");
   await db.exec(createTables);
   await db.exec(carsData);
 

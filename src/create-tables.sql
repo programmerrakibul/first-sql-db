@@ -7,21 +7,21 @@ CREATE TABLE IF NOT EXISTS cars (
   color TEXT NOT NULL,
   condition INTEGER NOT NULL,
   sold BOOLEAN NOT NULL
-)
+);
 
 CREATE TABLE IF NOT EXISTS dealerships(
   id SERIAL PRIMARY KEY,
   city TEXT NOT NULL,
   state TEXT NOT NULL,
   established DATE NOT NULL
-)
+);
 
 CREATE TABLE IF NOT EXISTS staff (
   id SERIAL PRIMARY KEY,
   dealership_id INTEGER NOT NULL REFERENCES dealerships(id),
   name TEXT NOT NULL,
   role TEXT NOT NULL
-)
+);
 
 CREATE TABLE IF NOT EXISTS sold_cars (
   id SERIAL PRIMARY KEY,
@@ -30,4 +30,4 @@ CREATE TABLE IF NOT EXISTS sold_cars (
   seller TEXT NOT NULL,
   sale_date DATE NOT NULL,
   sale_price INTEGER NOT NULL
-)
+);
