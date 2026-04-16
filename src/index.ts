@@ -1,7 +1,7 @@
 import { PGlite } from "@electric-sql/pglite";
 import fs from "fs";
 
-import type { TCar } from "./types/index.js";
+import type { TDealership } from "./types/index.js";
 
 (async () => {
   // Connect to the database
@@ -10,8 +10,14 @@ import type { TCar } from "./types/index.js";
   // Create tables and insert data
   const createTables = fs.readFileSync("./src/create-tables.sql", "utf-8");
   const carsData = fs.readFileSync("./src/insert-cars-data.sql", "utf-8");
+  const dealershipsData = fs.readFileSync(
+    "./src/insert-dealerships-data.sql",
+    "utf-8",
+  );
+
   await db.exec(createTables);
   await db.exec(carsData);
+  await db.exec(dealershipsData);
 
   // Read query
   const query = fs.readFileSync("./src/query.sql", "utf-8");
@@ -20,10 +26,10 @@ import type { TCar } from "./types/index.js";
   await db.exec(query);
 
   // Read
-  const response = await db.query<TCar>(`SELECT * FROM cars;`);
-  const cars = response?.rows;
+  const response = await db.query<TDealership>(`SELECT * FROM dealerships;`);
+  const dealerships = response?.rows;
 
   // Print
   console.clear();
-  console.table(cars);
+  console.table(dealerships);
 })();
