@@ -11,6 +11,10 @@ import fs from "fs";
   await db.exec(createTables);
   await db.exec(carsData);
 
+  // Create CRUD operations
+  const crudOperations = fs.readFileSync("./src/crud-operations.sql", "utf-8");
+  await db.exec(crudOperations);
+
   // Populate tables
   const populateTables = fs.readFileSync("./src/populate-tables.sql", "utf-8");
   await db.exec(populateTables);
@@ -18,11 +22,8 @@ import fs from "fs";
   // Read query
   const query = fs.readFileSync("./src/query.sql", "utf-8");
 
-  // CRUD operation query
-  await db.exec(query);
-
   // Read
-  const response = await db.query(`SELECT * FROM staff;`);
+  const response = await db.query(query);
   const dealerships = response?.rows;
 
   // Print
