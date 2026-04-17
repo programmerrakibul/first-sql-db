@@ -19,6 +19,9 @@ import fs from "fs";
   const populateTables = fs.readFileSync("./src/populate-tables.sql", "utf-8");
   await db.exec(populateTables);
 
+  const alterTables = fs.readFileSync("./src/alter-tables.sql", "utf-8");
+  await db.exec(alterTables);
+
   // Read query
   const query = fs.readFileSync("./src/query.sql", "utf-8");
 
