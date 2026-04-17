@@ -11,6 +11,6 @@ UPDATE cars SET
   AND model = 'Camry';
 
 -- Deleting data
-DELETE FROM cars
-WHERE sold = true
-  OR condition < 3;
+-- DELETE FROM cars
+-- WHERE sold = true
+--   OR condition < 3;
