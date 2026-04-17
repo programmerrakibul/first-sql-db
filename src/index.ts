@@ -1,8 +1,6 @@
 import { PGlite } from "@electric-sql/pglite";
 import fs from "fs";
 
-import type { TDealership } from "./types/index.js";
-
 (async () => {
   // Connect to the database
   const db = new PGlite();
@@ -13,6 +11,7 @@ import type { TDealership } from "./types/index.js";
   await db.exec(createTables);
   await db.exec(carsData);
 
+  // Populate tables
   const populateTables = fs.readFileSync("./src/populate-tables.sql", "utf-8");
   await db.exec(populateTables);
 
@@ -23,7 +22,7 @@ import type { TDealership } from "./types/index.js";
   await db.exec(query);
 
   // Read
-  const response = await db.query<TDealership>(`SELECT * FROM dealerships;`);
+  const response = await db.query(`SELECT * FROM staff;`);
   const dealerships = response?.rows;
 
   // Print
